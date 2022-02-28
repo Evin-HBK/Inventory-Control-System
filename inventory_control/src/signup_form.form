@@ -73,7 +73,7 @@
           <verticalTextPosition value="1"/>
         </properties>
       </component>
-      <component id="eaf4b" class="javax.swing.JTextField" binding="usernametb">
+      <component id="eaf4b" class="javax.swing.JTextField" binding="fnametb">
         <constraints>
           <grid row="1" column="5" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -81,7 +81,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="ef71" class="javax.swing.JTextField" binding="fnametb">
+      <component id="ef71" class="javax.swing.JTextField" binding="unametb">
         <constraints>
           <grid row="0" column="5" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>

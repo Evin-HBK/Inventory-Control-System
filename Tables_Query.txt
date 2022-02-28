@@ -1,0 +1,109 @@
+CREATE TABLE `mini`.`customer` (
+  `Customer_ID` VARCHAR(30) NOT NULL,
+  `First_name` VARCHAR(45) NOT NULL,
+  `Last_name` VARCHAR(45) NOT NULL,
+  `Address` VARCHAR(45) NOT NULL,
+  `Phone_number` INT NOT NULL,
+  PRIMARY KEY (`Customer_ID`),
+  UNIQUE INDEX `Customer_ID_UNIQUE` (`Customer_ID` ASC) VISIBLE,
+  UNIQUE INDEX `Phone_number_UNIQUE` (`Phone_number` ASC) VISIBLE);
+
+
+CREATE TABLE `mini`.`product` (
+  `Product_ID` VARCHAR(20) NOT NULL,
+  `Brand_name` VARCHAR(45) NOT NULL,
+  `Product_name` VARCHAR(45) NOT NULL,
+  `Availability` INT NULL,
+  PRIMARY KEY (`Product_ID`),
+  UNIQUE INDEX `Product_ID_UNIQUE` (`Product_ID` ASC) VISIBLE);
+
+
+
+CREATE TABLE `mini`.`brand` (
+  `Brand_name` VARCHAR(45) NOT NULL,
+  `Brand_address` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Brand_name`),
+  UNIQUE INDEX `Brand_name_UNIQUE` (`Brand_name` ASC) VISIBLE);
+
+
+ALTER TABLE `mini`.`product` 
+ADD INDEX `Brandfk_idx` (`Brand_name` ASC) VISIBLE;
+;
+ALTER TABLE `mini`.`product` 
+ADD CONSTRAINT `Brandfk`
+  FOREIGN KEY (`Brand_name`)
+  REFERENCES `mini`.`brand` (`Brand_name`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `mini`.`product` 
+ADD COLUMN `Price` INT NOT NULL AFTER `Availability`;
+
+
+CREATE TABLE `mini`.`cart` (
+  `Product_ID` VARCHAR(20) NOT NULL,
+  `Product_name` VARCHAR(45) NOT NULL,
+  `Price` INT NOT NULL,
+  `Customer_ID` VARCHAR(45) NOT NULL,
+  INDEX `productfk_idx` (`Product_ID` ASC) VISIBLE,
+  INDEX `customerfk_idx` (`Customer_ID` ASC) VISIBLE,
+  CONSTRAINT `productfk`
+    FOREIGN KEY (`Product_ID`)
+    REFERENCES `mini`.`product` (`Product_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `customerfk`
+    FOREIGN KEY (`Customer_ID`)
+    REFERENCES `mini`.`customer` (`Customer_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+CREATE TABLE `mini`.`checkout` (
+  `Order_ID` VARCHAR(45) NOT NULL,
+  `Customer_ID` VARCHAR(30) NOT NULL,
+  `Total_price` INT NOT NULL,
+  `Date` DATETIME NOT NULL,
+  `Quantity` INT NOT NULL,
+  PRIMARY KEY (`Order_ID`),
+  UNIQUE INDEX `Order_ID_UNIQUE` (`Order_ID` ASC) VISIBLE,
+  INDEX `cartfk_idx` (`Customer_ID` ASC) VISIBLE,
+  CONSTRAINT `cartfk`
+    FOREIGN KEY (`Customer_ID`)
+    REFERENCES `mini`.`cart` (`Customer_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+INSERT INTO PRODUCT VALUES ('E001','NIKE','FOOTBALL',50,3500);
+INSERT INTO PRODUCT VALUES ('E002','WILSON','TENNIS BALL',60,550);
+INSERT INTO PRODUCT VALUES ('E003','AERO','CRICKET BAT',80,1550);
+INSERT INTO PRODUCT VALUES ('E004','NIKE','FOOTBALL BOOTS',45,6550);
+INSERT INTO PRODUCT VALUES ('E005','WILSON','TENNIS RACKET',90,3350);
+INSERT INTO PRODUCT VALUES ('E006','NIVIA','VOLLEYBALL',45,950);
+INSERT INTO PRODUCT VALUES ('E007','NIKE','BASKETBALL',55,2350);
+INSERT INTO PRODUCT VALUES ('E008','ADIDAS','FOOTBALL',29,3050);
+INSERT INTO PRODUCT VALUES ('E009','NIKE','RUNNING SHOES',88,8550);
+INSERT INTO PRODUCT VALUES ('E010','ADIDAS','FOOTBALL BOOTS',98,7950);
+INSERT INTO PRODUCT VALUES ('E011','NIKE','GOALKEEPER GLOVES',100,4500);
+
+INSERT INTO brand VALUES ('NIKE','Lulu Mall');
+INSERT INTO brand VALUES ('ADIDAS',' 24/7 Sports');
+INSERT INTO brand VALUES ('WILSON','Sports For All');
+INSERT INTO brand VALUES ('AERO','Lulu Mall');
+INSERT INTO brand VALUES ('NIVIA','Lulu Mall');
+
+
+
+--adding product into cart
+INSERT INTO cart (Product_ID, Product_name, Brand_name, Price, Customer_ID) 
+SELECT Product.Product_ID, Product.Product_name, Product.Brand_name,  Product.Price , Customer.Customer_ID FROM Product, Customer;
+
+--decrementing availability on adding
+SET Availability = Availability - 1 where Availability > 0;
+
+--total sum in checkout table
+INSERT INTO checkout (Total_price) 
+SELECT SUM(Price) as Total_price FROM cart;
+
+--Clearing the table aka truncate
+  DELETE FROM CART;

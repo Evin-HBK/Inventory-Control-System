@@ -15,6 +15,7 @@ public class sign_login extends JDialog{
         setMinimumSize(new Dimension(450,475));
         setModal(true);
         setLocationRelativeTo(parent);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         signbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
