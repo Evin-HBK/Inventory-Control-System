@@ -92,8 +92,29 @@ public class cart extends JDialog {
         goToCheckoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
-                checkout mycheckout=new checkout(uname);
+                try
+                {
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory","root","toor");
+                    pst=con.prepareStatement("select * from cart where Customer_ID=?");
+                    pst.setString(1,uname);
+                    ResultSet rs=pst.executeQuery();
+                    int flag=0;
+                    while(rs.next())
+                    {
+                        flag=1;
+                    }
+                    if(flag==1)
+                    {
+                        dispose();
+                        checkout mycheckout=new checkout(uname);
+                    }
+                    else
+                        JOptionPane.showMessageDialog(null,"No items in Cart","Add Items!",JOptionPane.ERROR_MESSAGE);
+                }
+                catch (SQLException e1)
+                {
+                    e1.printStackTrace( );
+                }
             }
         });
     }
