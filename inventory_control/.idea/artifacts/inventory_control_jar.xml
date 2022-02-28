@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/inventory_control_jar</output-path>
     <root id="archive" name="inventory_control.jar">
       <element id="module-output" name="inventory_control" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/rs2xml.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/mysql-connector-java-8.0.28.jar" path-in-jar="/" />
     </root>
   </artifact>
