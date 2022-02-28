@@ -29,6 +29,7 @@ public class login_form extends JDialog{
                 if(user!=null)
                 {
                     dispose();
+                    productpage myproducts=new productpage(uname);
                 }
                 else
                 {

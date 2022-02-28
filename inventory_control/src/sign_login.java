@@ -12,7 +12,7 @@ public class sign_login extends JDialog{
         super(parent);
         setTitle("Welcome page");
         setContentPane(sign_login);
-        setMinimumSize(new Dimension(450,475));
+        setMinimumSize(new Dimension(900,475));
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -26,6 +26,7 @@ public class sign_login extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 login_form mylogin=new login_form(parent);
+                dispose();
             }
         });
         setVisible(true);
