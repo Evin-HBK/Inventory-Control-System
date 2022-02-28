@@ -33,7 +33,7 @@ public class productpage extends JDialog{
         setTitle("Product Page");
         setContentPane(Main);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setMinimumSize(new Dimension(475,500));
+        setMinimumSize(new Dimension(750,500));
         table_load();
         insertButton.addActionListener(new ActionListener() {
             @Override

@@ -55,7 +55,7 @@ public class checkout extends JDialog{
         setTitle("Checkout");
         setContentPane(Main1);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setMinimumSize(new Dimension(475,500));
+        setMinimumSize(new Dimension(750,500));
         table_load(uname);
         String oid,total;
         customeridtf.setText(uname);
