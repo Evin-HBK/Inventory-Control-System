@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.*;
@@ -30,10 +31,10 @@ public class productpage extends JDialog{
         }
     }
     public productpage(String uname){
-        setTitle("Product Page");
-        setContentPane(Main);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setMinimumSize(new Dimension(750,500));
+        JFrame frame=new JFrame("Product Page");
+        frame.setContentPane(Main);
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(750,500));
         table_load();
         insertButton.addActionListener(new ActionListener() {
             @Override
@@ -117,11 +118,11 @@ public class productpage extends JDialog{
                 }
             }
         });
-        setVisible(true);
+        frame.setVisible(true);
         goToCartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
                 cart mycart=new cart(uname);
             }
         });

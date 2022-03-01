@@ -20,14 +20,12 @@ public class signup_form extends JDialog{
     private JTextField lnametb;
     private JTextField addresstb;
     private JTextField phnotb;
-    public signup_form(JFrame parent)
+    public signup_form()
     {
-        super(parent);
         setTitle("Create a new account");
         setContentPane(signup);
         setMinimumSize(new Dimension(450,475));
         setModal(true);
-        setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         Submitsignup.addActionListener(new ActionListener() {
             @Override

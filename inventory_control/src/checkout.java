@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.sql.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -52,10 +53,10 @@ public class checkout extends JDialog{
         return(Double.toString(sum));
     }
     public checkout(String uname) {
-        setTitle("Checkout");
-        setContentPane(Main1);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setMinimumSize(new Dimension(750,500));
+        JFrame frame= new JFrame("Checkout");
+        frame.setContentPane(Main1);
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(750,500));
         table_load(uname);
         String oid,total;
         customeridtf.setText(uname);
@@ -65,11 +66,11 @@ public class checkout extends JDialog{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
                 cart mycart=new cart(uname);
             }
         });
-        setVisible(true);
+        frame.setVisible(true);
         PAYButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -89,7 +90,7 @@ public class checkout extends JDialog{
                 {
                     e1.printStackTrace();
                 }
-                dispose();
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
                 JOptionPane.showMessageDialog(null, "Thank you for shopping with us!!!!");
             }
         });

@@ -11,14 +11,12 @@ public class login_form extends JDialog{
     private JTextField unametb;
     private JTextField phnotb;
     private JButton lgnbtn;
-    public login_form(JFrame parent)
+    public login_form()
     {
-        super(parent);
         setTitle("Login Page");
         setContentPane(login);
         setMinimumSize(new Dimension(450,475));
         setModal(true);
-        setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         lgnbtn.addActionListener(new ActionListener() {
             @Override
