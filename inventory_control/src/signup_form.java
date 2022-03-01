@@ -44,6 +44,21 @@ public class signup_form extends JDialog{
         String lname= lnametb.getText();
         String address= addresstb.getText();
         String phno= phnotb.getText();
+        long x=99999L;
+        long y=10000000000L;
+        if(Long.parseLong(phno)<x||Long.parseLong(phno)>y)
+        {
+            JOptionPane.showMessageDialog(this,"Please enter a valid number","Try Again",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        for(int i=0;i<phno.length();++i)
+        {
+            if(!Character.isDigit(phno.charAt(i)))
+            {
+                JOptionPane.showMessageDialog(this,"Please enter a valid number","Try Again",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
         if(uname.isEmpty()||fname.isEmpty()||lname.isEmpty()||address.isEmpty()||phno.isEmpty())
         {
             JOptionPane.showMessageDialog(this,"Please enter all fields","Try Again",JOptionPane.ERROR_MESSAGE);
