@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.*;
 
 public class login_form extends JDialog{
@@ -11,13 +10,21 @@ public class login_form extends JDialog{
     private JTextField unametb;
     private JTextField phnotb;
     private JButton lgnbtn;
+    WindowListener exitListener = new WindowAdapter() {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            dispose();
+            sign_login mysignlogin=new sign_login();
+        }
+    };
     public login_form()
     {
         setTitle("Login Page");
         setContentPane(login);
         setMinimumSize(new Dimension(450,475));
         setModal(true);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(exitListener);
         lgnbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
